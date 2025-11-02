@@ -1,7 +1,7 @@
 spring:
   application:
     name: ms-auth
-    profiles:
-      active: development
-    config:
-      import: optional:configserver:http://root:root@localhost:8888
+  profiles:
+    active: development
+  config:
+    import: optional:configserver:http://root:root@localhost:8888
