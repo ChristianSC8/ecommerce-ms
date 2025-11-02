@@ -34,7 +34,7 @@ cloud:
 
         routes:
           - id: ms-auth
-            uri: lb://ms-auth
+            uri: lb://MS-AUTH
             predicates:
               - Path=/auth/**
               -
