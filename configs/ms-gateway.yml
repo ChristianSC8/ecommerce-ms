@@ -10,38 +10,39 @@ eureka:
     prefer-ip-address: true
 
 spring:
-cloud:
-  gateway:
-    server:
-      webflux:
-        globalcors:
-          cors-configurations:
-            '[/**]':
-              allowedOrigins: "http://localhost:4200"
-              allowedHeaders: "*"
-              allowedMethods:
-                - GET
-                - POST
-                - PUT
-                - DELETE
-                - OPTIONS
-              allowCredentials: true
+  cloud:
+    gateway:
+      server:
+        webflux:
+          globalcors:
+            cors-configurations:
+              '[/**]':
+                allowedOrigins: "http://localhost:4200"
+                allowedHeaders: "*"
+                allowedMethods:
+                  - GET
+                  - POST
+                  - PUT
+                  - DELETE
+                  - OPTIONS
+                allowCredentials: true
 
-        discovery:
-          locator:
-            enabled: true
-            lower-case-service-id: false
+          discovery:
+            locator:
+              enabled: true
+              lower-case-service-id: false
 
-        routes:
-          - id: ms-auth
-            uri: lb://MS-AUTH
-            predicates:
-              - Path=/auth/**
-              -
-        httpclient:
-          connect-timeout: 5000
-          response-timeout: 10s
+          routes:
+            - id: ms-auth
+              uri: lb://MS-AUTH
+              predicates:
+                - Path=/auth/**
+
+          httpclient:
+            connect-timeout: 5000
+            response-timeout: 10s
 
 logging:
   level:
-    org.springframework.cloud.gateway: INFO
+    org.springframework.cloud.gateway: DEBUG
+    org.springframework.cloud.gateway.route: TRACE
