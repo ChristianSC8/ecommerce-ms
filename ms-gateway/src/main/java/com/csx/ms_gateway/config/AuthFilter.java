@@ -17,7 +17,7 @@ public class AuthFilter extends AbstractGatewayFilterFactory<AuthFilter.Config> 
 
     private static final String BEARER_PREFIX = "Bearer";
     private static final int TOKEN_PARTS_LENGTH = 2;
-    private static final String AUTH_SERVICE_URL = "http://ms-auth-service/auth/validate?token=";
+    private static final String AUTH_SERVICE_URL = "http://ms-auth/auth/validate?token=";
 
     private final WebClient.Builder webClientBuilder;
 
