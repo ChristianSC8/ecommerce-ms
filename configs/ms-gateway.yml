@@ -30,11 +30,10 @@ spring:
           discovery:
             locator:
               enabled: true
-              lower-case-service-id: false
 
           routes:
             - id: ms-auth
-              uri: lb://MS-AUTH
+              uri: lb://ms-auth
               predicates:
                 - Path=/auth/**
 
