@@ -32,6 +32,12 @@ cloud:
             enabled: true
             lower-case-service-id: true
 
+        routes:
+          - id: ms-auth
+            uri: lb://ms-auth
+            predicates:
+              - Path=/auth/**
+              -
         httpclient:
           connect-timeout: 5000
           response-timeout: 10s
