@@ -16,6 +16,34 @@ spring:
     password: postgres
     driver-class-name: org.postgresql.Driver
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+
+  metrics:
+    export:
+      otlp:
+        enabled: true
+        url: http://localhost:4328/v1/metrics
+        step: 10s
+
+  tracing:
+    sampling:
+      probability: 1.0
+
+  otlp:
+    tracing:
+      endpoint: http://localhost:4328/v1/traces
+
+logging:
+  pattern:
+    level: "%5p [${spring.application.name},%X{traceId:-},%X{spanId:-}]"
+  level:
+    root: INFO
+    com.csx.msauth: DEBUG
+
 eureka:
   client:
     serviceUrl:
