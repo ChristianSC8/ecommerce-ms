@@ -22,20 +22,18 @@ management:
       exposure:
         include: health,info,metrics,prometheus
 
-  metrics:
-    export:
-      otlp:
+  otlp:
+    metrics:
+      export:
         enabled: true
         url: http://localhost:4328/v1/metrics
         step: 10s
+    tracing:
+      endpoint: http://localhost:4328/v1/traces
 
   tracing:
     sampling:
       probability: 1.0
-
-  otlp:
-    tracing:
-      endpoint: http://localhost:4328/v1/traces
 
 logging:
   pattern:
