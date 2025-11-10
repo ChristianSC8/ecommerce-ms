@@ -45,7 +45,7 @@ otel:
       endpoint: http://localhost:4328
       protocol: http/protobuf
   logs:
-    exporter: logging
+    exporter: otlp
   metrics:
     exporter: otlp
   traces:
