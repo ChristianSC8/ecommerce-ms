@@ -1,37 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+    <include resource="org/springframework/boot/logging/logback/console-appender.xml"/>
 
     <!-- Console Appender con correlación de trazas -->
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [trace_id=%X{trace_id:-},span_id=%X{span_id:-},trace_flags=%X{trace_flags:-}] %logger{36} - %msg%n</pattern>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}] [%t] %logger{36} - %msg%n</pattern>
             <charset>UTF-8</charset>
         </encoder>
-    </appender>
-
-    <!-- OpenTelemetry Appender para enviar logs al collector -->
-    <appender name="OTEL" class="io.opentelemetry.instrumentation.logback.appender.v1_0.OpenTelemetryAppender">
-        <captureExperimentalAttributes>true</captureExperimentalAttributes>
-        <captureCodeAttributes>true</captureCodeAttributes>
-        <captureMarkerAttribute>true</captureMarkerAttribute>
-        <captureKeyValuePairAttributes>true</captureKeyValuePairAttributes>
-        <captureMdcAttributes>*</captureMdcAttributes>
     </appender>
 
     <!-- Root logger -->
     <root level="INFO">
         <appender-ref ref="CONSOLE"/>
-        <appender-ref ref="OTEL"/>
     </root>
 
     <!-- Loggers específicos -->
     <logger name="com.csx.msauth" level="DEBUG" additivity="false">
         <appender-ref ref="CONSOLE"/>
-        <appender-ref ref="OTEL"/>
     </logger>
 
-    <logger name="org.springframework.cloud.config" level="INFO"/>
-    <logger name="io.opentelemetry" level="INFO"/>
-    <logger name="io.opentelemetry.exporter" level="DEBUG"/>
+    <logger name="org.springframework.web" level="DEBUG"/>
+    <logger name="io.micrometer.tracing" level="DEBUG"/>
 
 </configuration>
