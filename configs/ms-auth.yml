@@ -43,22 +43,32 @@ otel:
   exporter:
     otlp:
       endpoint: http://localhost:4328
+      protocol: http/protobuf
   logs:
     exporter: logging
   metrics:
     exporter: otlp
   traces:
     exporter: otlp
+
   propagators: tracecontext,baggage
+  instrumentation:
+    logback-appender:
+      enabled: true
+    spring-webmvc:
+      enabled: true
+    jdbc:
+      enabled: true
 
 logging:
   pattern:
-    level: "%5p [${spring.application.name},%X{trace_id:-},%X{span_id:-}]"
+    level: "%5p [${spring.application.name:},%X{trace_id:-},%X{span_id:-}]"
   level:
     root: INFO
     com.csx.msauth: DEBUG
-    io.opentelemetry: DEBUG
-    io.opentelemetry.exporter: TRACE
+    io.opentelemetry: INFO
+    io.opentelemetry.exporter: INFO
+    io.opentelemetry.instrumentation: INFO
 
 eureka:
   client:
